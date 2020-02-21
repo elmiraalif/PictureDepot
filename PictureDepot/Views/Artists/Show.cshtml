@@ -1,0 +1,43 @@
+﻿@model PictureDepot.Models.Artist
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details of @(Model.FirstName + " " + Model.LastName  + ":")</h2>
+
+<ul class="list-group">
+    <li class="list-group-item  align-items-center">
+        First Name:
+        <span class=""><strong>@Model.FirstName</strong></span>
+    </li>
+    <li class="list-group-item  align-items-center">
+        Last Name:
+        <span class=""><strong>@Model.LastName</strong></span>
+    </li>
+    <li class="list-group-item  align-items-center">
+        Date of Birth:
+        <span class=""><strong>@Model.BirthDate</strong></span>
+    </li>
+    <li class="list-group-item  align-items-center">
+        Hire Date:
+        <span class=""><strong>@Model.HireDate</strong></span>
+    </li>
+    <li class="list-group-item  align-items-center">
+        Email / Website:
+        <span class=""><strong>@Model.Email</strong></span>
+    </li>
+    <li class="list-group-item  align-items-center">
+        Phone Number:
+        <span class=""><strong>@Model.Phone</strong></span>
+    </li>
+</ul>
+
+<form method="post" action="Update/@Model.ArtistId">
+    <div class="form-group text-center">
+        <a href="/Artists/List"><button type="button" class="btn btn-primary">Back to Artists</button></a>
+        <button type="submit" class="btn btn-default">Edit Artist</button>
+    </div>
+</form>
+
+

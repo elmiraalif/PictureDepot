@@ -1,0 +1,54 @@
+﻿@model PictureDepot.Models.Artist
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update @(Model.FirstName + Model.LastName)</h2>
+
+<form action="/Artists/Show/Update/@Model.ArtistId" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="FirstName">First Name:</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="FirstName" name="FirstName" value=@Model.FirstName>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="LastName" class="col-lg-2 control-label">Last Name:</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="LastName" name="LastName" value=@Model.LastName>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="BirthDate" class="col-lg-2 control-label">Date of Birth:</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="BirthDate" name="BirthDate" value=@Model.BirthDate>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="HireDate" class="col-lg-2 control-label">Hire Date:</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="HireDate" name="HireDate" value=@Model.HireDate>
+        </div>
+    </div>
+    <hr />
+    <h4>Contact Information</h4>
+    <div class="form-group">
+        <label for="Email" class="col-lg-2 control-label">Email/Website:</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="Email" name="Email" value=@Model.Email>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Phone" class="col-lg-2 control-label">Phone:</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="Phone" name="Phone" value=@Model.Phone>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <a href="/Artists/List" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</form>
