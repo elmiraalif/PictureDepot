@@ -196,7 +196,6 @@
     <Content Include="Views\Products\Add.cshtml" />
     <Content Include="Views\Artists\List.cshtml" />
     <Content Include="Views\Artists\Add.cshtml" />
-    <Content Include="Views\Artists\Delete.cshtml" />
     <Content Include="Views\Artists\Show.cshtml" />
     <Content Include="Views\Artists\Update.cshtml" />
   </ItemGroup>

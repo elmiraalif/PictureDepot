@@ -49,7 +49,9 @@ namespace PictureDepot.Controllers
         [HttpPost]
         public ActionResult Add(string firstName, string lastName, string birthDate, string hireDate, string email, string phone)
         {
+            //setup the query string to add the input value fields of user into the database table
             string query = "INSERT INTO Artists(FirstName, LastName, BirthDate, HireDate, Email, Phone) VALUES (@FirstName, @LastName, @BirthDate, @HireDate, @Email, @Phone)";
+            //Set up the sql parameter which maps to dataset columns 
             SqlParameter[] sqlparams = new SqlParameter[6];
             sqlparams[0] = new SqlParameter("@FirstName", firstName);
             sqlparams[1] = new SqlParameter("@LastName", lastName);
@@ -57,16 +59,14 @@ namespace PictureDepot.Controllers
             sqlparams[3] = new SqlParameter("@HireDate", hireDate);
             sqlparams[4] = new SqlParameter("@Email", email);
             sqlparams[5] = new SqlParameter("@Phone", phone);
-
+            //run the query against sqlparams
             db.Database.ExecuteSqlCommand(query, sqlparams);
+            //back to list of artists as it's finished
             return RedirectToAction("List");
         }
 
-        //This is the get request
-        public ActionResult Delete()
-        {
-            return View();
-        }
+
+
         //the post request => the action of deleting
         [HttpPost]
         public ActionResult Delete(int id)
@@ -81,19 +81,25 @@ namespace PictureDepot.Controllers
             return RedirectToAction("List");
         }
 
-    //the Get request fo rshowing the specific Artist
+
+    //the Get request for showing the specific Artist
         public ActionResult Show(int id)
         {
+            //Set up the query to grab the data for the targeted artist
             string query = "SELECT * FROM Artists WHERE ArtistId = @ArtistId";
+            //sqlparameter to map the data 
             var parameter = new SqlParameter("@ArtistId", id);
+            //run the query
+            //Use the FirstOrDefault to get only one row from the resultset
             Artist selectedArtist = db.Artists.SqlQuery(query, parameter).FirstOrDefault();
-
+            //display the artist
             return View(selectedArtist);
         }
 
-        //Get request of Update => takes the user to the page of Update
+        //Get request of Update => takes the user to the page of Update, with populated data inside the input fields
         public ActionResult Update(int id)
         {
+            //Set up the query to select all columns of a specific row (The selected artist)
             string query = "SELECT * FROM Artists where ArtistId = @ArtistId";
             var parameter = new SqlParameter("@ArtistId", id);
             Artist selectedArtist = db.Artists.SqlQuery(query, parameter).FirstOrDefault();
@@ -101,18 +107,19 @@ namespace PictureDepot.Controllers
             return View(selectedArtist);
         }
 
-        //post request of Update to make changes 
+        //post request of Update to make changes : The action of Updating the data
         [HttpPost]
-        public ActionResult Update(string firstName, string lastName, string birthDate, string hireDate, string email, string phone)
+        public ActionResult Update(int id, string firstName, string lastName, string birthDate, string hireDate, string email, string phone)
         {
             string query = "UPDATE Artists SET FirstName = @FirstName, LastName = @LastName, BirthDate = @BirthDate, HireDate = @HireDate, Email = @Email, Phone = @Phone where ArtistId = @ArtistId";
-            SqlParameter[] sqlparams = new SqlParameter[6];
+            SqlParameter[] sqlparams = new SqlParameter[7];
             sqlparams[0] = new SqlParameter("@FirstName", firstName);
             sqlparams[1] = new SqlParameter("@LastName", lastName);
             sqlparams[2] = new SqlParameter("@BirthDate", birthDate);
             sqlparams[3] = new SqlParameter("@HireDate", hireDate);
             sqlparams[4] = new SqlParameter("@Email", email);
             sqlparams[5] = new SqlParameter("@Phone", phone);
+            sqlparams[6] = new SqlParameter("@ArtistId", id);
             db.Database.ExecuteSqlCommand(query, sqlparams);
             //go back to the list of artists
             return RedirectToAction("List");
